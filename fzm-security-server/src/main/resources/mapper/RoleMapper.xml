@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fxs.fzm.security.mapper.RoleMapper">
+    <!--映射返回值 -->
+    <resultMap id="BaseResultMap" type="com.fxs.fzm.security.bean.Role">
+        <id column="id" property="id"/>
+        <result column="dept_id" property="deptId"/>
+        <result column="name" property="name"/>
+        <result column="create_time" property="createTime"/>
+        <result column="create_user_id" property="createUserId"/>
+        <result column="modify_time" property="modifyTime"/>
+        <result column="modify_user_id" property="modifyUserId"/>
+        <result column="is_delete" property="isDelete"/>
+        <result column="jc_role_id" property="jcRoleId"/>
+    </resultMap>
+    <!--基本列 -->
+    <sql id="select_column_clause">
+        t.id
+        ,t.dept_id
+        ,t.name
+        ,t.create_time
+        ,t.create_user_id
+        ,t.modify_time
+        ,t.modify_user_id
+        ,t.is_delete
+        ,t.jc_role_id
+    </sql>
+    <!--where 条件组装 -->
+    <sql id="bean_where_clause">
+        <where>
+            <trim prefixOverrides="AND">
+            <if test="id != null">
+                AND t.id = #{id}
+            </if>
+            <if test="deptId != null">
+                AND t.dept_id = #{deptId}
+            </if>
+            <if test="name != null and name != ''">
+                AND t.name = #{name}
+            </if>
+            <if test="createTime != null">
+                AND t.create_time = #{createTime}
+            </if>
+            <if test="createUserId != null">
+                AND t.create_user_id = #{createUserId}
+            </if>
+            <if test="modifyTime != null">
+                AND t.modify_time = #{modifyTime}
+            </if>
+            <if test="modifyUserId != null">
+                AND t.modify_user_id = #{modifyUserId}
+            </if>
+            <if test="isDelete != null">
+                AND t.is_delete = #{isDelete}
+            </if>
+            <if test="jcRoleId != null">
+                AND t.jc_role_id = #{jcRoleId}
+            </if>
+            <if test="ts != null">
+                AND <![CDATA[ t.create_time >= #{ts}]]>
+            </if>
+            <if test="te != null">
+                AND <![CDATA[ t.create_time <= #{te}]]>
+            </if>
+            <if test="queryWhere != null and queryWhere != ''">
+                AND <![CDATA[ ${queryWhere}]]>
+            </if>
+            </trim>
+        </where>
+    </sql>
+    <!--排序条件 -->
+    <sql id="bean_sort_clause">
+        <if test="sorts != null and sorts != ''">
+            ORDER BY
+            <if test="sorts == 'id'">
+                t.id
+            </if>
+            <if test="sorts == 'deptId'">
+                t.dept_id
+            </if>
+            <if test="sorts == 'name'">
+                t.name
+            </if>
+            <if test="sorts == 'createTime'">
+                t.create_time
+            </if>
+            <if test="sorts == 'createUserId'">
+                t.create_user_id
+            </if>
+            <if test="sorts == 'modifyTime'">
+                t.modify_time
+            </if>
+            <if test="sorts == 'modifyUserId'">
+                t.modify_user_id
+            </if>
+            <if test="sorts == 'isDelete'">
+                t.is_delete
+            </if>
+            <if test="sorts == 'jcRoleId'">
+                t.jc_role_id
+            </if>
+            <if test="order != null and order != ''">
+                ${order}
+            </if>
+            <if test="order == null or order == ''">
+                desc
+            </if>
+        </if>
+        <if test="orderBy != null and orderBy != ''">
+            ORDER BY
+                ${orderBy}
+        </if>
+    </sql>
+    <!--条数限制 -->
+    <sql id="bean_limit_clause">
+        <if test="limit != null">
+            limit 0 , ${limit}
+        </if>
+    </sql>
+    
+    <insert id="batchInsert" parameterType="java.util.List">
+        insert into tbl_cms_role (
+            id
+            ,dept_id
+            ,name
+            ,create_time
+            ,create_user_id
+            ,modify_time
+            ,modify_user_id
+            ,is_delete
+            ,jc_role_id
+        ) values
+        <foreach collection="list" item="records" separator=",">
+            (
+            #{records.id}
+            ,#{records.deptId}
+            ,#{records.name}
+            ,#{records.createTime}
+            ,#{records.createUserId}
+            ,#{records.modifyTime}
+            ,#{records.modifyUserId}
+            ,#{records.isDelete}
+            ,#{records.jcRoleId}
+            )
+        </foreach>
+    </insert>
+    
+    <update id="batchUpdate" parameterType="java.util.List">
+        <foreach collection="list" item="records" separator=";">
+            update tbl_cms_role
+            <set>
+                <if test="records.deptId != null">
+                    dept_id = #{records.deptId},
+                </if>
+                <if test="records.name != null and records.name != ''">
+                    name = #{records.name},
+                </if>
+                <if test="records.createTime != null">
+                    create_time = #{records.createTime},
+                </if>
+                <if test="records.createUserId != null">
+                    create_user_id = #{records.createUserId},
+                </if>
+                <if test="records.modifyTime != null">
+                    modify_time = #{records.modifyTime},
+                </if>
+                <if test="records.modifyUserId != null">
+                    modify_user_id = #{records.modifyUserId},
+                </if>
+                <if test="records.isDelete != null">
+                    is_delete = #{records.isDelete},
+                </if>
+                <if test="records.jcRoleId != null">
+                    jc_role_id = #{records.jcRoleId},
+                </if>
+            </set>
+            where id = #{records.id}
+        </foreach>
+    </update>
+    
+    <delete id="deleteByParam" parameterType="java.util.HashMap">
+        delete t
+        from tbl_cms_role t
+        <include refid="bean_where_clause"/>
+    </delete>
+    
+    <select id="selectByParam" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+        select
+        <include refid="select_column_clause"/>
+        from
+        tbl_cms_role t
+        <include refid="bean_where_clause"/>
+        <include refid="bean_sort_clause"/>
+        <include refid="bean_limit_clause"/>
+    </select>
+
+</mapper>

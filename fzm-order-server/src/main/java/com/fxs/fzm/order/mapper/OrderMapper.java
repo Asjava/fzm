@@ -1,0 +1,15 @@
+package com.fxs.fzm.order.mapper;
+
+import com.fxs.fzm.common.base.BaseMapper;
+import com.fxs.fzm.order.bean.Order;
+
+/**
+ * Title: 映射类
+ * Description:
+ * Copyright: Copyright (c) 2020-09-09 10:41:51
+ * Company: 北京福富软件技术股份有限公司福州分公司
+ * @author: fuzm
+ */
+public interface OrderMapper extends BaseMapper<Order> {
+
+}

@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fxs.fzm.security.mapper.WebUserMapper">
+    <!--映射返回值 -->
+    <resultMap id="BaseResultMap" type="com.fxs.fzm.security.bean.WebUser">
+        <id column="id" property="id"/>
+        <result column="uid" property="uid"/>
+        <result column="user_name" property="userName"/>
+        <result column="login_name" property="loginName"/>
+        <result column="password" property="password"/>
+        <result column="org_id" property="orgId"/>
+        <result column="dept_id" property="deptId"/>
+        <result column="is_admin" property="isAdmin"/>
+        <result column="mobile" property="mobile"/>
+        <result column="id_num" property="idNum"/>
+        <result column="sex" property="sex"/>
+        <result column="age" property="age"/>
+        <result column="create_time" property="createTime"/>
+        <result column="create_user_id" property="createUserId"/>
+        <result column="modify_time" property="modifyTime"/>
+        <result column="modify_user_id" property="modifyUserId"/>
+        <result column="is_delete" property="isDelete"/>
+        <result column="status" property="status"/>
+        <result column="job_num" property="jobNum"/>
+        <result column="email" property="email"/>
+        <result column="sort" property="sort"/>
+        <result column="is_lock" property="isLock"/>
+        <result column="login_lately_time" property="loginLatelyTime"/>
+        <result column="login_num" property="loginNum"/>
+        <result column="is_super_admin" property="isSuperAdmin"/>
+        <result column="ret_password" property="retPassword"/>
+        <result column="res_password_time" property="resPasswordTime"/>
+        <result column="jc_user_id" property="jcUserId"/>
+        <result column="position_id" property="positionId"/>
+    </resultMap>
+    <!--基本列 -->
+    <sql id="select_column_clause">
+        t.id
+        ,t.uid
+        ,t.user_name
+        ,t.login_name
+        ,t.password
+        ,t.org_id
+        ,t.dept_id
+        ,t.is_admin
+        ,t.mobile
+        ,t.id_num
+        ,t.sex
+        ,t.age
+        ,t.create_time
+        ,t.create_user_id
+        ,t.modify_time
+        ,t.modify_user_id
+        ,t.is_delete
+        ,t.status
+        ,t.job_num
+        ,t.email
+        ,t.sort
+        ,t.is_lock
+        ,t.login_lately_time
+        ,t.login_num
+        ,t.is_super_admin
+        ,t.ret_password
+        ,t.res_password_time
+        ,t.jc_user_id
+        ,t.position_id
+    </sql>
+    <!--where 条件组装 -->
+    <sql id="bean_where_clause">
+        <where>
+            <trim prefixOverrides="AND">
+            <if test="id != null">
+                AND t.id = #{id}
+            </if>
+            <if test="uid != null and uid != ''">
+                AND t.uid = #{uid}
+            </if>
+            <if test="userName != null and userName != ''">
+                AND t.user_name = #{userName}
+            </if>
+            <if test="loginName != null and loginName != ''">
+                AND t.login_name = #{loginName}
+            </if>
+            <if test="password != null and password != ''">
+                AND t.password = #{password}
+            </if>
+            <if test="orgId != null">
+                AND t.org_id = #{orgId}
+            </if>
+            <if test="deptId != null">
+                AND t.dept_id = #{deptId}
+            </if>
+            <if test="isAdmin != null">
+                AND t.is_admin = #{isAdmin}
+            </if>
+            <if test="mobile != null and mobile != ''">
+                AND t.mobile = #{mobile}
+            </if>
+            <if test="idNum != null and idNum != ''">
+                AND t.id_num = #{idNum}
+            </if>
+            <if test="sex != null">
+                AND t.sex = #{sex}
+            </if>
+            <if test="age != null">
+                AND t.age = #{age}
+            </if>
+            <if test="createTime != null">
+                AND t.create_time = #{createTime}
+            </if>
+            <if test="createUserId != null">
+                AND t.create_user_id = #{createUserId}
+            </if>
+            <if test="modifyTime != null">
+                AND t.modify_time = #{modifyTime}
+            </if>
+            <if test="modifyUserId != null">
+                AND t.modify_user_id = #{modifyUserId}
+            </if>
+            <if test="isDelete != null">
+                AND t.is_delete = #{isDelete}
+            </if>
+            <if test="status != null">
+                AND t.status = #{status}
+            </if>
+            <if test="jobNum != null and jobNum != ''">
+                AND t.job_num = #{jobNum}
+            </if>
+            <if test="email != null and email != ''">
+                AND t.email = #{email}
+            </if>
+            <if test="sort != null">
+                AND t.sort = #{sort}
+            </if>
+            <if test="isLock != null">
+                AND t.is_lock = #{isLock}
+            </if>
+            <if test="loginLatelyTime != null">
+                AND t.login_lately_time = #{loginLatelyTime}
+            </if>
+            <if test="loginNum != null">
+                AND t.login_num = #{loginNum}
+            </if>
+            <if test="isSuperAdmin != null and isSuperAdmin != ''">
+                AND t.is_super_admin = #{isSuperAdmin}
+            </if>
+            <if test="retPassword != null">
+                AND t.ret_password = #{retPassword}
+            </if>
+            <if test="resPasswordTime != null">
+                AND t.res_password_time = #{resPasswordTime}
+            </if>
+            <if test="jcUserId != null">
+                AND t.jc_user_id = #{jcUserId}
+            </if>
+            <if test="positionId != null">
+                AND t.position_id = #{positionId}
+            </if>
+            <if test="ts != null">
+                AND <![CDATA[ t.create_time >= #{ts}]]>
+            </if>
+            <if test="te != null">
+                AND <![CDATA[ t.create_time <= #{te}]]>
+            </if>
+            <if test="queryWhere != null and queryWhere != ''">
+                AND <![CDATA[ ${queryWhere}]]>
+            </if>
+            </trim>
+        </where>
+    </sql>
+    <!--排序条件 -->
+    <sql id="bean_sort_clause">
+        <if test="sorts != null and sorts != ''">
+            ORDER BY
+            <if test="sorts == 'id'">
+                t.id
+            </if>
+            <if test="sorts == 'uid'">
+                t.uid
+            </if>
+            <if test="sorts == 'userName'">
+                t.user_name
+            </if>
+            <if test="sorts == 'loginName'">
+                t.login_name
+            </if>
+            <if test="sorts == 'password'">
+                t.password
+            </if>
+            <if test="sorts == 'orgId'">
+                t.org_id
+            </if>
+            <if test="sorts == 'deptId'">
+                t.dept_id
+            </if>
+            <if test="sorts == 'isAdmin'">
+                t.is_admin
+            </if>
+            <if test="sorts == 'mobile'">
+                t.mobile
+            </if>
+            <if test="sorts == 'idNum'">
+                t.id_num
+            </if>
+            <if test="sorts == 'sex'">
+                t.sex
+            </if>
+            <if test="sorts == 'age'">
+                t.age
+            </if>
+            <if test="sorts == 'createTime'">
+                t.create_time
+            </if>
+            <if test="sorts == 'createUserId'">
+                t.create_user_id
+            </if>
+            <if test="sorts == 'modifyTime'">
+                t.modify_time
+            </if>
+            <if test="sorts == 'modifyUserId'">
+                t.modify_user_id
+            </if>
+            <if test="sorts == 'isDelete'">
+                t.is_delete
+            </if>
+            <if test="sorts == 'status'">
+                t.status
+            </if>
+            <if test="sorts == 'jobNum'">
+                t.job_num
+            </if>
+            <if test="sorts == 'email'">
+                t.email
+            </if>
+            <if test="sorts == 'sort'">
+                t.sort
+            </if>
+            <if test="sorts == 'isLock'">
+                t.is_lock
+            </if>
+            <if test="sorts == 'loginLatelyTime'">
+                t.login_lately_time
+            </if>
+            <if test="sorts == 'loginNum'">
+                t.login_num
+            </if>
+            <if test="sorts == 'isSuperAdmin'">
+                t.is_super_admin
+            </if>
+            <if test="sorts == 'retPassword'">
+                t.ret_password
+            </if>
+            <if test="sorts == 'resPasswordTime'">
+                t.res_password_time
+            </if>
+            <if test="sorts == 'jcUserId'">
+                t.jc_user_id
+            </if>
+            <if test="sorts == 'positionId'">
+                t.position_id
+            </if>
+            <if test="order != null and order != ''">
+                ${order}
+            </if>
+            <if test="order == null or order == ''">
+                desc
+            </if>
+        </if>
+        <if test="orderBy != null and orderBy != ''">
+            ORDER BY
+                ${orderBy}
+        </if>
+    </sql>
+    <!--条数限制 -->
+    <sql id="bean_limit_clause">
+        <if test="limit != null">
+            limit 0 , ${limit}
+        </if>
+    </sql>
+    
+    <insert id="batchInsert" parameterType="java.util.List">
+        insert into tbl_cms_web_user (
+            id
+            ,uid
+            ,user_name
+            ,login_name
+            ,password
+            ,org_id
+            ,dept_id
+            ,is_admin
+            ,mobile
+            ,id_num
+            ,sex
+            ,age
+            ,create_time
+            ,create_user_id
+            ,modify_time
+            ,modify_user_id
+            ,is_delete
+            ,status
+            ,job_num
+            ,email
+            ,sort
+            ,is_lock
+            ,login_lately_time
+            ,login_num
+            ,is_super_admin
+            ,ret_password
+            ,res_password_time
+            ,jc_user_id
+            ,position_id
+        ) values
+        <foreach collection="list" item="records" separator=",">
+            (
+            #{records.id}
+            ,#{records.uid}
+            ,#{records.userName}
+            ,#{records.loginName}
+            ,#{records.password}
+            ,#{records.orgId}
+            ,#{records.deptId}
+            ,#{records.isAdmin}
+            ,#{records.mobile}
+            ,#{records.idNum}
+            ,#{records.sex}
+            ,#{records.age}
+            ,#{records.createTime}
+            ,#{records.createUserId}
+            ,#{records.modifyTime}
+            ,#{records.modifyUserId}
+            ,#{records.isDelete}
+            ,#{records.status}
+            ,#{records.jobNum}
+            ,#{records.email}
+            ,#{records.sort}
+            ,#{records.isLock}
+            ,#{records.loginLatelyTime}
+            ,#{records.loginNum}
+            ,#{records.isSuperAdmin}
+            ,#{records.retPassword}
+            ,#{records.resPasswordTime}
+            ,#{records.jcUserId}
+            ,#{records.positionId}
+            )
+        </foreach>
+    </insert>
+    
+    <update id="batchUpdate" parameterType="java.util.List">
+        <foreach collection="list" item="records" separator=";">
+            update tbl_cms_web_user
+            <set>
+                <if test="records.uid != null and records.uid != ''">
+                    uid = #{records.uid},
+                </if>
+                <if test="records.userName != null and records.userName != ''">
+                    user_name = #{records.userName},
+                </if>
+                <if test="records.loginName != null and records.loginName != ''">
+                    login_name = #{records.loginName},
+                </if>
+                <if test="records.password != null and records.password != ''">
+                    password = #{records.password},
+                </if>
+                <if test="records.orgId != null">
+                    org_id = #{records.orgId},
+                </if>
+                <if test="records.deptId != null">
+                    dept_id = #{records.deptId},
+                </if>
+                <if test="records.isAdmin != null">
+                    is_admin = #{records.isAdmin},
+                </if>
+                <if test="records.mobile != null and records.mobile != ''">
+                    mobile = #{records.mobile},
+                </if>
+                <if test="records.idNum != null and records.idNum != ''">
+                    id_num = #{records.idNum},
+                </if>
+                <if test="records.sex != null">
+                    sex = #{records.sex},
+                </if>
+                <if test="records.age != null">
+                    age = #{records.age},
+                </if>
+                <if test="records.createTime != null">
+                    create_time = #{records.createTime},
+                </if>
+                <if test="records.createUserId != null">
+                    create_user_id = #{records.createUserId},
+                </if>
+                <if test="records.modifyTime != null">
+                    modify_time = #{records.modifyTime},
+                </if>
+                <if test="records.modifyUserId != null">
+                    modify_user_id = #{records.modifyUserId},
+                </if>
+                <if test="records.isDelete != null">
+                    is_delete = #{records.isDelete},
+                </if>
+                <if test="records.status != null">
+                    status = #{records.status},
+                </if>
+                <if test="records.jobNum != null and records.jobNum != ''">
+                    job_num = #{records.jobNum},
+                </if>
+                <if test="records.email != null and records.email != ''">
+                    email = #{records.email},
+                </if>
+                <if test="records.sort != null">
+                    sort = #{records.sort},
+                </if>
+                <if test="records.isLock != null">
+                    is_lock = #{records.isLock},
+                </if>
+                <if test="records.loginLatelyTime != null">
+                    login_lately_time = #{records.loginLatelyTime},
+                </if>
+                <if test="records.loginNum != null">
+                    login_num = #{records.loginNum},
+                </if>
+                <if test="records.isSuperAdmin != null and records.isSuperAdmin != ''">
+                    is_super_admin = #{records.isSuperAdmin},
+                </if>
+                <if test="records.retPassword != null">
+                    ret_password = #{records.retPassword},
+                </if>
+                <if test="records.resPasswordTime != null">
+                    res_password_time = #{records.resPasswordTime},
+                </if>
+                <if test="records.jcUserId != null">
+                    jc_user_id = #{records.jcUserId},
+                </if>
+                <if test="records.positionId != null">
+                    position_id = #{records.positionId},
+                </if>
+            </set>
+            where id = #{records.id}
+        </foreach>
+    </update>
+    
+    <delete id="deleteByParam" parameterType="java.util.HashMap">
+        delete t
+        from tbl_cms_web_user t
+        <include refid="bean_where_clause"/>
+    </delete>
+    
+    <select id="selectByParam" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+        select
+        <include refid="select_column_clause"/>
+        from
+        tbl_cms_web_user t
+        <include refid="bean_where_clause"/>
+        <include refid="bean_sort_clause"/>
+        <include refid="bean_limit_clause"/>
+    </select>
+
+    <resultMap id="webUserAndRoleResultMap" type="com.fxs.fzm.security.bean.WebUser">
+        <id column="id" property="id"/>
+        <result column="uid" property="uid"/>
+        <result column="user_name" property="userName"/>
+        <result column="login_name" property="loginName"/>
+        <result column="password" property="password"/>
+        <result column="org_id" property="orgId"/>
+        <result column="dept_id" property="deptId"/>
+        <result column="is_admin" property="isAdmin"/>
+        <result column="mobile" property="mobile"/>
+        <result column="id_num" property="idNum"/>
+        <result column="sex" property="sex"/>
+        <result column="age" property="age"/>
+        <result column="create_time" property="createTime"/>
+        <result column="create_user_id" property="createUserId"/>
+        <result column="modify_time" property="modifyTime"/>
+        <result column="modify_user_id" property="modifyUserId"/>
+        <result column="is_delete" property="isDelete"/>
+        <result column="status" property="status"/>
+        <result column="job_num" property="jobNum"/>
+        <result column="email" property="email"/>
+        <result column="sort" property="sort"/>
+        <result column="is_lock" property="isLock"/>
+        <result column="login_lately_time" property="loginLatelyTime"/>
+        <result column="login_num" property="loginNum"/>
+        <result column="is_super_admin" property="isSuperAdmin"/>
+        <result column="ret_password" property="retPassword"/>
+        <result column="res_password_time" property="resPasswordTime"/>
+        <result column="jc_user_id" property="jcUserId"/>
+        <result column="position_id" property="positionId"/>
+        <collection property="roles" column="id" select="getRoles" />
+    </resultMap>
+    
+    <select id ="findByName" parameterType="java.lang.String" resultMap="webUserAndRoleResultMap">
+        select
+            <include refid="select_column_clause"/>
+        from
+            tbl_cms_web_user t
+        <include refid="bean_where_clause"/>
+    </select>
+
+    <select id="getRoles" parameterType="java.lang.Long" resultMap="com.fxs.fzm.security.mapper.RoleMapper.BaseResultMap">
+        SELECT
+          <include refid="com.fxs.fzm.security.mapper.RoleMapper.select_column_clause"/>
+        FROM
+            tbl_cms_role t
+        WHERE
+           t.id IN (
+                SELECT
+                    role_id
+                FROM
+                    tbl_cms_mid_user_role t
+                WHERE
+                    t.user_id = #{id}
+            )
+    </select>
+            
+</mapper>
