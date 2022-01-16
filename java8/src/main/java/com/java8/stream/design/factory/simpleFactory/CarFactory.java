@@ -5,6 +5,10 @@ import java.util.Properties;
 
 public class CarFactory {
 
+    private CarFactory() {
+
+    }
+
     private static Properties prop = new Properties();
     static {
         try {
