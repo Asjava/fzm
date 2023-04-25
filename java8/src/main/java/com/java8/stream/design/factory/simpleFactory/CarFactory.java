@@ -18,7 +18,7 @@ public class CarFactory {
         }
     }
 
-    public static Car newCar() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+    public static Car getInstance() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         String carClassName = prop.getProperty("Car");
         Class<Car> carClass = (Class<Car>) Class.forName(carClassName);
         Car car = carClass.newInstance();

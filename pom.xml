@@ -28,7 +28,6 @@
 <!--    </properties>-->
 
     <modules>
-<!--        <module>fzm-netty-server</module>-->
 <!--        <module>fzm-nacos-client-server</module>-->
 <!--        <module>fzm-nacos-config-server</module>-->
 <!--        <module>fzm-order-server</module>-->
@@ -43,6 +42,8 @@
         <module>fzm-zookeeper-server</module>
 <!--        <module>zookeeper-server-demo</module>-->
         <module>java8</module>
+        <module>fzm-netty-server</module>
+        <module>fzm-netty-41-server</module>
     </modules>
 
 <!--    <dependencies>-->
